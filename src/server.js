@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const { urlencoded } = require('body-parser');
 const path = require('path');
 const debug = require('debug')('twilio-run:server');
 
@@ -32,8 +32,7 @@ function createServer(port = DEFAULT_PORT, config) {
 
   const { ASSETS_PATH, FUNCTIONS_PATH } = getPaths(config.baseDir);
   const app = express();
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+  app.use(urlencoded({ extended: false }));
 
   if (config.logs) {
     app.use(createLogger(config));
